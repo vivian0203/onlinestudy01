@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: MyPage
-          image: username/MyPage:latest
+          image: username/MyPage:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
