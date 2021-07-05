@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: learningManagement
-          image: username/learningManagement:latest
+          image: username/learningManagement:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
