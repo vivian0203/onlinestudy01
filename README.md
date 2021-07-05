@@ -425,16 +425,14 @@ public interface LearningEvaluationRepository extends PagingAndSortingRepository
 
 - (동기호출-Req)평가등록 서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현 
 ```
-# (BiddingExamination) BiddingManagementService.java
-package bidding.external;
+# (learningEvaluation) learningManagementService.java
+package onlinestudy.external;
 
-@FeignClient(name="BiddingManagement", url="http://${api.url.bidding}:8080", fallback=BiddingManagementServiceFallback.class)
-public interface BiddingManagementService {
-
-    @RequestMapping(method= RequestMethod.GET, path="/biddingManagements/registSucessBidder")
-    public boolean registSucessBidder(@RequestParam("noticeNo") String noticeNo,
-    @RequestParam("succBidderNm") String succBidderNm, @RequestParam("phoneNumber") String phoneNumber);
-
+@FeignClient(name="orderManagement", url="http://localhost:8081", fallback=OrderManagementServiceFallback.class)
+public interface OrderManagementService {
+    @RequestMapping(method= RequestMethod.GET, path="/orderManagements/registerEvaluation")
+    public boolean registerEvaluation(@RequestParam("orderNo") String orderNo,
+    @RequestParam("score") String score);
 }
 ```
 
