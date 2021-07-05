@@ -582,21 +582,24 @@ public class OrderManagement {
 - (Subscribe-등록) 학습관리 서비스에서는 주문관리 등록됨 이벤트를 수신하면 주문관리 번호를 등록하는 정책을 처리하도록 PolicyHandler를 구현한다:
 
 ```
-@Service
-public class PolicyHandler{
-
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverNoticeRegistered_RecieveBiddingNotice(@Payload NoticeRegistered noticeRegistered){
+    public void wheneverCourseOrdered_StartLearningManagement(@Payload CourseOrdered courseOrdered){
 
-        if(!noticeRegistered.validate()) return;
+        if(!courseOrdered.validate()) return;
+        
+          LearningManagement learningManagement = new LearningManagement();
+          learningManagement.setOrderNo(courseOrdered.getOrderNo());
+          learningManagement.setCourseNo(courseOrdered.getCourseNo());
+          learningManagement.setOrderdate(courseOrdered.getOrderdate());
+          learningManagement.setBegindate(courseOrdered.getBegindate());
+          learningManagement.setEnddate(courseOrdered.getEnddate());
+          learningManagement.setPhonenum(courseOrdered.getPhonenum());
 
-        if(noticeRegistered.isMe()){
-            BiddingParticipation biddingParticipation = new BiddingParticipation();
-            biddingParticipation.setNoticeNo(noticeRegistered.getNoticeNo());
-
-            biddingParticipationRepository.save(biddingParticipation);
-        }
+          learningManagementRepository.save(learningManagement);
+        
+        System.out.println("\n\n##### listener StartLearningManagement : " + courseOrdered.toJson() + "\n\n");
     }
+
 
 ```
 - (Subscribe-취소) 학습관리 서비스에서는 주문관리가 취소됨 이벤트를 수신하면 학습관리 정보를 삭제하는 정책을 처리하도록 PolicyHandler를 구현한다:
