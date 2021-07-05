@@ -208,13 +208,13 @@
 (서비스 별 포트) 분석/설계 단계에서 도출된 헥사고날 아키텍처에 따라, 각 BC별로 대변되는 마이크로 서비스들을 스프링부트 등으로 구현하였다. 구현한 각 서비스를 로컬에서 실행하는 방법은 아래와 같다 (각자의 포트넘버는 8081 ~ 8085, 8088 이다)
 
 ```
-cd BiddingManagement
+cd orderManagement
 mvn spring-boot:run
 
-cd BiddingParticipation
+cd learningManagement
 mvn spring-boot:run 
 
-cd BiddingExamination
+cd learningEvaluation
 mvn spring-boot:run  
 
 cd Notification
@@ -229,7 +229,7 @@ mvn spring-boot:run
 
 ## DDD 의 적용
 
-- (Entity 예시) 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (아래 예시는 입찰관리 마이크로 서비스). 이때 가능한 현업에서 사용하는 언어 (유비쿼터스 랭귀지)를 그대로 사용하려고 노력했다.
+- (Entity 예시) 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (아래 예시는 주문관리 마이크로 서비스). 이때 가능한 현업에서 사용하는 언어 (유비쿼터스 랭귀지)를 그대로 사용하려고 노력했다.
 
 ```
 package bidding;
