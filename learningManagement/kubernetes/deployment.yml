@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: learningManagement
-          image: username/learningManagement:v1.0
+          image: user17skccacr.azurecr.io/learningManagement:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
