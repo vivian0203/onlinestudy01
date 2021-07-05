@@ -2,7 +2,7 @@
 
 ### Repositories
 
-- https://github.com/vivian0203/online-study.git
+- https://github.com/vivian0203/onlinestudy.git
 
 
 
