@@ -160,7 +160,7 @@
 
 ### 1차 완성본에 대한 기능적 요구사항을 커버하는지 검증 (1/2)
 
-![10  1차 완성본에 대한 기능적](https://user-images.githubusercontent.com/84000922/122162421-82431d80-ceae-11eb-8a7d-18df4aff613a.png)
+![image](https://user-images.githubusercontent.com/84000893/124518011-62a17400-de20-11eb-894e-85ee29af8a82.png)
 
 ```
 1) 입찰담당부서는 입찰공고를 등록한다. 입찰공고가 등록되면 입찰공고가 접수된다.
