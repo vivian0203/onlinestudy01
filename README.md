@@ -605,20 +605,16 @@ public class OrderManagement {
 - (Subscribe-취소) 학습관리 서비스에서는 주문관리가 취소됨 이벤트를 수신하면 학습관리 정보를 삭제하는 정책을 처리하도록 PolicyHandler를 구현한다:
   
 ```
-@Service
-public class PolicyHandler{
-    @Autowired BiddingParticipationRepository biddingParticipationRepository;
+@StreamListener(KafkaProcessor.INPUT)
+    public void wheneverCourseOrderCanceled_CancelLearningManagement(@Payload CourseOrderCanceled courseOrderCanceled){
 
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverNoticeCanceled_CancelBiddingParticipation(@Payload NoticeCanceled noticeCanceled){
+        if(!courseOrderCanceled.validate()) return;
+        
+           LearningManagement learningManagement = learningManagementRepository.findByOrderNo(courseOrderCanceled.getOrderNo());
+           learningManagementRepository.delete(learningManagement);
 
-        if(!noticeCanceled.validate()) return;
-
-        if(noticeCanceled.isMe()){
-            BiddingParticipation biddingParticipation = biddingParticipationRepository.findByNoticeNo(noticeCanceled.getNoticeNo());
-            biddingParticipationRepository.delete(biddingParticipation);
-        }
-            
+        
+        System.out.println("\n\n##### listener CancelLearningManagement : " + courseOrderCanceled.toJson() + "\n\n");
     }
 
 ```
