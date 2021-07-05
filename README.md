@@ -568,15 +568,15 @@ http PATCH http://localhost:8083/learningEvaluations/1 orderNo=01 score=90
  
 ```
 @Entity
-@Table(name="BiddingManagement_table")
-public class BiddingManagement {
+@Table(name="OrderManagement_table")
+public class OrderManagement {
 
- ...
     @PostPersist
     public void onPostPersist(){
-        NoticeRegistered noticeRegistered = new NoticeRegistered();
-        BeanUtils.copyProperties(this, noticeRegistered);
-        noticeRegistered.publishAfterCommit();
+        CourseOrdered courseOrdered = new CourseOrdered();
+        BeanUtils.copyProperties(this, courseOrdered);
+        courseOrdered.publishAfterCommit();
+
     }
 ```
 - (Subscribe-등록) 학습관리 서비스에서는 주문관리 등록됨 이벤트를 수신하면 주문관리 번호를 등록하는 정책을 처리하도록 PolicyHandler를 구현한다:
