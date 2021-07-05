@@ -1,0 +1,82 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: orderManagement
+          uri: http://localhost:8081
+          predicates:
+            - Path=/orderManagements/** 
+        - id: learningManagement
+          uri: http://localhost:8082
+          predicates:
+            - Path=/learningManagements/** 
+        - id: learningEvaluation
+          uri: http://localhost:8083
+          predicates:
+            - Path=/learningEvaluations/** 
+        - id: Notification
+          uri: http://localhost:8084
+          predicates:
+            - Path=/smsHistories/** 
+        - id: MyPage
+          uri: http://localhost:8085
+          predicates:
+            - Path= /MyPage/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: orderManagement
+          uri: http://orderManagement:8080
+          predicates:
+            - Path=/orderManagements/** 
+        - id: learningManagement
+          uri: http://learningManagement:8080
+          predicates:
+            - Path=/learningManagements/** 
+        - id: learningEvaluation
+          uri: http://learningEvaluation:8080
+          predicates:
+            - Path=/learningEvaluations/** 
+        - id: MyPage
+          uri: http://MyPage:8080
+          predicates:
+            - Path= /학습현황조회/**
+        - id: Notification
+          uri: http://Notification:8080
+          predicates:
+            - Path=/smsHistories/** 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
