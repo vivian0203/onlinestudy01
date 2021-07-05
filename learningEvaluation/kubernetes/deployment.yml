@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: learningEvaluation
-          image: username/learningEvaluation:latest
+          image: username/learningEvaluation:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
