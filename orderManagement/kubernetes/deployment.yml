@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: orderManagement
-          image: username/orderManagement:v1.0
+          image: user17skccacr.azurecr.io/orderManagement:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
