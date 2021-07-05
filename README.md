@@ -200,7 +200,7 @@
 
 ### Git Organization / Repositories
 
-![image](https://user-images.githubusercontent.com/84000893/124391117-03613800-dd2a-11eb-9040-246dfedc61c3.png)
+![image](https://user-images.githubusercontent.com/84000893/124521447-77830500-de2a-11eb-9969-fdfa6fdd35ff.png)
 
 
 # 구현:
