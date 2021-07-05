@@ -500,26 +500,42 @@ public class OrderManagementController {
 
 - (동기호출-PostUpdate) 평가결과가 등록된 직후(@PostUpdate) 평가등록을 요청하도록 처리 (평가등록이 아닌 경우, 이후 로직 스킵)
 ```
-# BiddingExamination.java (Entity)
+# learningEvaluation.java (Entity)
+package onlinestudy;
 
-    @PostUpdate
-    public void onPostUpdate(){
-        // 낙찰업체가 아니면 Skip.
-        if(getSuccessBidderFlag() == false) return;
+    @PreUpdate
+    public void onPreUpdate() throws Exception{
+        EvaluationScoreRegistered evaluationScoreRegistered = new EvaluationScoreRegistered();
+        BeanUtils.copyProperties(this, evaluationScoreRegistered);
+        evaluationScoreRegistered.publishAfterCommit();
+
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+
+        // 평가점수가 없으면 Skip.
+        if(getEndFlag() == false) return;
 
         try{
             // mappings goes here
-            boolean isUpdated = BiddingExaminationApplication.applicationContext.getBean(bidding.external.BiddingManagementService.class)
-            .registSucessBidder(getNoticeNo(), getCompanyNm(), getPhoneNumber());
+            boolean isUpdated = LearningEvaluationApplication.applicationContext.getBean(onlinestudy.external.OrderManagementService.class)
+            .registerEvaluation(getOrderNo(), getScore());
 
             if(isUpdated == false){
-                throw new Exception("입찰관리 서비스의 입찰공고에 낙찰자 정보가 갱신되지 않음");
+                throw new Exception("주문관리 서비스의 주문관리에 평가점수가 갱신되지 않음");
             }
         }catch(java.net.ConnectException ce){
-            throw new Exception("입찰관리 서비스 연결 실패");
+            throw new Exception("주문관리 서비스 연결 실패");
         }catch(Exception e){
-            throw new Exception("입찰관리 서비스 처리 실패");
+            throw new Exception("주문관리 서비스 처리 실패");
         }
+        
+      //onlinestudy.external.OrderManagement orderManagement = new onlinestudy.external.OrderManagement();
+    
+        
+    }
+    private boolean getEndFlag() {
+        return endFlg;
+    }
 ```
 
 - (동기호출-테스트) 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 주문관리 시스템이 장애가 나면 학습평가 등록도 못 한다는 것을 확인:
