@@ -438,16 +438,16 @@ public interface OrderManagementService {
 
 - (Fallback) 평가등록 서비스가 정상적으로 호출되지 않을 경우 Fallback 처리
 ```
-# (BiddingExamination) BiddingManagementServiceFallback.java
-package bidding.external;
+# (learningEvaluation) learningManagementServiceFallback.java
+package onlinestudy.external;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BiddingManagementServiceFallback implements BiddingManagementService{
+public class OrderManagementServiceFallback implements OrderManagementService{
 
     @Override
-    public boolean registSucessBidder(String noticeNo,String succBidderNm, String phoneNumber){
+    public boolean registerEvaluation(String orderNo,String score){
         System.out.println("★★★★★★★★★★★Circuit breaker has been opened. Fallback returned instead.★★★★★★★★★★★");
         return false;
     }
