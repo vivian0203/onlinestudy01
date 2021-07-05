@@ -421,9 +421,9 @@ public interface LearningEvaluationRepository extends PagingAndSortingRepository
 
 ## 동기식 호출 과 Fallback 처리
 
-분석단계에서의 조건 중 하나로 심사결과등록(입찰심사)->낙찰자정보등록(입찰관리) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다. 
+분석단계에서의 조건 중 하나로 평가점수등록(학습평가)->평가등록(주문관리) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다. 
 
-- (동기호출-Req)낙찰자정보 등록 서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현 
+- (동기호출-Req)평가등록 서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현 
 ```
 # (BiddingExamination) BiddingManagementService.java
 package bidding.external;
@@ -438,7 +438,7 @@ public interface BiddingManagementService {
 }
 ```
 
-- (Fallback) 낙찰자정보 등록 서비스가 정상적으로 호출되지 않을 경우 Fallback 처리
+- (Fallback) 평가등록 서비스가 정상적으로 호출되지 않을 경우 Fallback 처리
 ```
 # (BiddingExamination) BiddingManagementServiceFallback.java
 package bidding.external;
@@ -462,7 +462,7 @@ feign:
     enabled: true
 ```
 
-- (동기호출-Res) 낙찰자자정보 등록 서비스 (정상 호출)
+- (동기호출-Res) 평가등록 서비스 (정상 호출)
 ```
 # (BiddingManagement) BiddingManagementController.java
 package bidding;
@@ -498,7 +498,7 @@ package bidding;
  }
 ```
 
-- (동기호출-PostUpdate) 심사결과가 등록된 직후(@PostUpdate) 낙찰자정보 등록을 요청하도록 처리 (낙찰자가 아닌 경우, 이후 로직 스킵)
+- (동기호출-PostUpdate) 평가결과가 등록된 직후(@PostUpdate) 평가등록을 요청하도록 처리 (평가등록이 아닌 경우, 이후 로직 스킵)
 ```
 # BiddingExamination.java (Entity)
 
@@ -522,7 +522,7 @@ package bidding;
         }
 ```
 
-- (동기호출-테스트) 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 입찰관리 시스템이 장애가 나면 입찰심사 등록도 못 한다는 것을 확인:
+- (동기호출-테스트) 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 주문관리 시스템이 장애가 나면 학습평가 등록도 못 한다는 것을 확인:
 
 ```
 # 입찰관리(BiddingManagement) 서비스를 잠시 내려놓음 (ctrl+c)
@@ -546,9 +546,9 @@ http PATCH http://localhost:8083/biddingExaminations/1 noticeNo=n01 participateN
 ## 비동기식 호출 / 시간적 디커플링 / 장애격리 / 최종 (Eventual) 일관성 테스트
 
 
-입찰공고가 등록된 후에 입찰참여 시스템에 알려주는 행위는 동기식이 아니라 비 동기식으로 처리하여 입찰참여 시스템의 처리를 위하여 입찰공고 트랜잭션이 블로킹 되지 않도록 처리한다.
+주문관리가 등록된 후에 학습관리 시스템에 알려주는 행위는 동기식이 아니라 비 동기식으로 처리하여 학습관리 시스템의 처리를 위하여 주문관리 트랜잭션이 블로킹 되지 않도록 처리한다.
  
-- (Publish) 이를 위하여 입찰공고 기록을 남긴 후에 곧바로 등록 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
+- (Publish) 이를 위하여 주문관리 기록을 남긴 후에 곧바로 등록 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
  
 ```
 @Entity
@@ -563,7 +563,7 @@ public class BiddingManagement {
         noticeRegistered.publishAfterCommit();
     }
 ```
-- (Subscribe-등록) 입찰참여 서비스에서는 입찰공고 등록됨 이벤트를 수신하면 입찰공고 번호를 등록하는 정책을 처리하도록 PolicyHandler를 구현한다:
+- (Subscribe-등록) 학습관리 서비스에서는 주문관리 등록됨 이벤트를 수신하면 주문관리 번호를 등록하는 정책을 처리하도록 PolicyHandler를 구현한다:
 
 ```
 @Service
@@ -583,7 +583,7 @@ public class PolicyHandler{
     }
 
 ```
-- (Subscribe-취소) 입찰참여 서비스에서는 입찰공고가 취소됨 이벤트를 수신하면 입찰참여 정보를 삭제하는 정책을 처리하도록 PolicyHandler를 구현한다:
+- (Subscribe-취소) 학습관리 서비스에서는 주문관리가 취소됨 이벤트를 수신하면 학습관리 정보를 삭제하는 정책을 처리하도록 PolicyHandler를 구현한다:
   
 ```
 @Service
@@ -604,27 +604,27 @@ public class PolicyHandler{
 
 ```
 
-- (장애격리) 입찰관리, 입찰참여 시스템은 입찰심사 시스템과 완전히 분리되어 있으며, 이벤트 수신에 따라 처리되기 때문에, 입찰심사 시스템이 유지보수로 인해 잠시 내려간 상태라도 입찰관리, 입찰참여 서비스에 영향이 없다:
+- (장애격리) 주문관리, 학습관리 시스템은 학습평가 시스템과 완전히 분리되어 있으며, 이벤트 수신에 따라 처리되기 때문에, 학습평가 시스템이 유지보수로 인해 잠시 내려간 상태라도 주문관리, 학습관리 서비스에 영향이 없다:
 ```
-# 입찰심사 서비스 (BiddingExamination) 를 잠시 내려놓음 (ctrl+c)
+# 학습평가 서비스 (BiddingExamination) 를 잠시 내려놓음 (ctrl+c)
 
-#입찰공고 등록 : Success
+# 주문관리 등록 : Success
 http POST localhost:8081/biddingManagements noticeNo=n33 title=title33
-#입찰참여 등록 : Success
+# 학습관리 등록 : Success
 http PATCH http://localhost:8082/biddingParticipations/2 noticeNo=n33 participateNo=p33 companyNo=c33 companyNm=doremi33 phoneNumber=010-1234-1234
 
-#입찰관리에서 낙찰업체명 갱신 여부 확인
-http localhost:8081/biddingManagements/2     # 낙찰업체명 갱신 안 됨 확인
+# 주문관리에서 평가점수 갱신 여부 확인
+http localhost:8081/biddingManagements/2     # 평가점수 갱신 안 됨 확인
 
-#입찰심사 서비스 기동
+#학습평가 서비스 기동
 cd BiddingExamination
 mvn spring-boot:run
 
-#심사결과 등록 : Success
+#평가점수 등록 : Success
 http PATCH http://localhost:8083/biddingExaminations/2 noticeNo=n33 participateNo=p33 successBidderFlag=true
 
-#입찰관리에서 낙찰업체명 갱신 여부 확인
-http localhost:8081/biddingManagements/2     # 낙찰업체명 갱신됨 확인
+#주문관리에서 평가점수 갱신 여부 확인
+http localhost:8081/biddingManagements/2     # 평가점수 갱신됨 확인
 ```
 
 # 운영:
