@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: MyPage
-          image: username/MyPage:v1.0
+          image: user17skccacr.azurecr.io/MyPage:v1.0
           ports:
             - containerPort: 8080
           readinessProbe:
