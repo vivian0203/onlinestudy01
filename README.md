@@ -232,50 +232,58 @@ mvn spring-boot:run
 - (Entity 예시) 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (아래 예시는 주문관리 마이크로 서비스). 이때 가능한 현업에서 사용하는 언어 (유비쿼터스 랭귀지)를 그대로 사용하려고 노력했다.
 
 ```
-package bidding;
+package onlinestudy;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
+import java.util.List;
 import java.util.Date;
 
 @Entity
-@Table(name="BiddingManagement_table")
-public class BiddingManagement {
+@Table(name="OrderManagement_table")
+public class OrderManagement {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String noticeNo;
-    private String title;
-    private Date dueDate;
-    private Integer price;
-    private String demandOrgNm;
-    private String bizInfo;
-    private String qualifications;
-    private String succBidderNm;
-    private String phoneNumber;
+    private String orderNo;
+    private String courseNo;
+    private String phonenum;
+    private Date orderdate;
+    private Date begindate;
+    private Date enddate;
+    private String score;
 
     @PostPersist
     public void onPostPersist(){
-        NoticeRegistered noticeRegistered = new NoticeRegistered();
-        BeanUtils.copyProperties(this, noticeRegistered);
-        noticeRegistered.publishAfterCommit();
-    }
+        CourseOrdered courseOrdered = new CourseOrdered();
+        BeanUtils.copyProperties(this, courseOrdered);
+        courseOrdered.publishAfterCommit();
 
-    @PostUpdate
-    public void onPostUpdate(){
-        SuccessBidderRegistered successBidderRegistered = new SuccessBidderRegistered();
-        BeanUtils.copyProperties(this, successBidderRegistered);
-        successBidderRegistered.publishAfterCommit();
     }
-
     @PostRemove
     public void onPostRemove(){
-        NoticeCanceled noticeCanceled = new NoticeCanceled();
-        BeanUtils.copyProperties(this, noticeCanceled);
-        noticeCanceled.publishAfterCommit();
-    }
+        CourseOrderCanceled courseOrderCanceled = new CourseOrderCanceled();
+        BeanUtils.copyProperties(this, courseOrderCanceled);
+        courseOrderCanceled.publishAfterCommit();
 
+    }
+    @PostUpdate
+    public void onPostUpdate(){
+        EvaluationRegistered evaluationRegistered = new EvaluationRegistered();
+        BeanUtils.copyProperties(this, evaluationRegistered);
+        evaluationRegistered.publishAfterCommit();
+
+    }
+    @PrePersist
+    public void onPrePersist(){
+    }
+    @PreUpdate
+    public void onPreUpdate(){
+    }
+    @PreRemove
+    public void onPreRemove(){
+    }
 
     public Long getId() {
         return id;
@@ -284,69 +292,54 @@ public class BiddingManagement {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getNoticeNo() {
-        return noticeNo;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setNoticeNo(String noticeNo) {
-        this.noticeNo = noticeNo;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public Date getDueDate() {
-        return dueDate;
+    public String getCourseNo() {
+        return courseNo;
     }
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public void setCourseNo(String courseNo) {
+        this.courseNo = courseNo;
     }
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-    public String getDemandOrgNm() {
-        return demandOrgNm;
+    public String getPhonenum() {
+        return phonenum;
     }
 
-    public void setDemandOrgNm(String demandOrgNm) {
-        this.demandOrgNm = demandOrgNm;
+    public void setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
     }
-    public String getBizInfo() {
-        return bizInfo;
-    }
-
-    public void setBizInfo(String bizInfo) {
-        this.bizInfo = bizInfo;
-    }
-    public String getQualifications() {
-        return qualifications;
+    public Date getOrderdate() {
+        return orderdate;
     }
 
-    public void setQualifications(String qualifications) {
-        this.qualifications = qualifications;
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
     }
-    public String getSuccBidderNm() {
-        return succBidderNm;
-    }
-
-    public void setSuccBidderNm(String succBidderNm) {
-        this.succBidderNm = succBidderNm;
-    }
-    
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Date getBegindate() {
+        return begindate;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setBegindate(Date begindate) {
+        this.begindate = begindate;
+    }
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 
 }
