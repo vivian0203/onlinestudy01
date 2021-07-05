@@ -621,25 +621,25 @@ public class OrderManagement {
 
 - (장애격리) 주문관리, 학습관리 시스템은 학습평가 시스템과 완전히 분리되어 있으며, 이벤트 수신에 따라 처리되기 때문에, 학습평가 시스템이 유지보수로 인해 잠시 내려간 상태라도 주문관리, 학습관리 서비스에 영향이 없다:
 ```
-# 학습평가 서비스 (BiddingExamination) 를 잠시 내려놓음 (ctrl+c)
+# 학습평가 서비스 (learningEvaluation) 를 잠시 내려놓음 (ctrl+c)
 
 # 주문관리 등록 : Success
-http POST localhost:8081/biddingManagements noticeNo=n33 title=title33
+http POST localhost:8081/orderManagements orderNo=01 courseNo=01
 # 학습관리 등록 : Success
-http PATCH http://localhost:8082/biddingParticipations/2 noticeNo=n33 participateNo=p33 companyNo=c33 companyNm=doremi33 phoneNumber=010-1234-1234
+http PATCH http://localhost:8082/learningManagement/2 orderNo=01 courseNo=01
 
 # 주문관리에서 평가점수 갱신 여부 확인
-http localhost:8081/biddingManagements/2     # 평가점수 갱신 안 됨 확인
+http localhost:8081/orderManagements/2     # 평가점수 갱신 안 됨 확인
 
 #학습평가 서비스 기동
-cd BiddingExamination
+cd learningEvaluation
 mvn spring-boot:run
 
 #평가점수 등록 : Success
-http PATCH http://localhost:8083/biddingExaminations/2 noticeNo=n33 participateNo=p33 successBidderFlag=true
+http PATCH http://localhost:8083/learningEvaluations/2 orderNo=01 score=99 
 
 #주문관리에서 평가점수 갱신 여부 확인
-http localhost:8081/biddingManagements/2     # 평가점수 갱신됨 확인
+http localhost:8081/orderManagements/2     # 평가점수 갱신됨 확인
 ```
 
 # 운영:
