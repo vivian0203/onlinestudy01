@@ -462,38 +462,40 @@ feign:
 
 - (동기호출-Res) 평가등록 서비스 (정상 호출)
 ```
-# (BiddingManagement) BiddingManagementController.java
-package bidding;
+# (oderManagement) orderManagementController.java
+package onlinestudy;
 
- @RestController
- public class BiddingManagementController {
+@RestController
+public class OrderManagementController {
 
-    @Autowired
-    BiddingManagementRepository biddingManagementRepository;
+   @Autowired
+   OrderManagementRepository orderManagementRepository;
 
-    @RequestMapping(value = "/biddingManagements/registSucessBidder",
-       method = RequestMethod.GET,
-       produces = "application/json;charset=UTF-8")
-    public boolean registSucessBidder(HttpServletRequest request, HttpServletResponse response) {
-       boolean status = false;
+   @RequestMapping(value = "/orderManagements/registerEvaluation",
+      method = RequestMethod.GET,
+      produces = "application/json;charset=UTF-8")
+   
+  
+      public boolean registerEvaluation(HttpServletRequest request, HttpServletResponse response) {
+      boolean status = false;
 
-       String noticeNo = String.valueOf(request.getParameter("noticeNo"));
-       
-       BiddingManagement biddingManagement = biddingManagementRepository.findByNoticeNo(noticeNo);
+      String orderNo = String.valueOf(request.getParameter("orderNo"));
+      
+      System.out.println("@@@@@@@@@@@@@@@@@evaluation orderNo@" + request.getParameter("orderNo"));
+      System.out.println("@@@@@@@@@@@@@@@@@evaluation score@" + request.getParameter("score"));
+      
+      OrderManagement orderManagement = orderManagementRepository.findByOrderNo(orderNo);
 
-       if(biddingManagement.getDemandOrgNm() == null || "조달청".equals(biddingManagement.getDemandOrgNm()) == false){
-            biddingManagement.setSuccBidderNm(request.getParameter("succBidderNm"));
-            biddingManagement.setPhoneNumber(request.getParameter("phoneNumber"));
+     // if(orderManagement.orderNo()){
+           orderManagement.setScore(request.getParameter("score"));
+           orderManagementRepository.save(orderManagement);
+           status = true;
+     // }
 
-            biddingManagementRepository.save(biddingManagement);
+      return status;
+   }
 
-            status = true;
-       }
-
-       return status;
-    }
-
- }
+}
 ```
 
 - (동기호출-PostUpdate) 평가결과가 등록된 직후(@PostUpdate) 평가등록을 요청하도록 처리 (평가등록이 아닌 경우, 이후 로직 스킵)
