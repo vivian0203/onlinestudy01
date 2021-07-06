@@ -706,7 +706,7 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 
 2.bidding/BiddingExamination/kubernetes/service.yaml 파일 수정 (BiddingManagement/BiddingParticipation/MyPage/Notification 동일)
 
-![image](https://user-images.githubusercontent.com/70736001/122512673-26aa9880-d044-11eb-8587-38f8cd261326.png)
+![image](https://user-images.githubusercontent.com/84000893/124528228-a4dbad00-de42-11eb-82a2-5b961e0d7433.png)
 
 3.bidding/gateway/kubernetes/service.yaml 파일 수정
 
