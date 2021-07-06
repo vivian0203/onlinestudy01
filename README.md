@@ -899,7 +899,7 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 1.부하테스트 전
 
-![image](https://user-images.githubusercontent.com/70736001/122506400-3c669080-d039-11eb-8e5e-a4f76b0e2956.png)
+![image](https://user-images.githubusercontent.com/84000893/124542035-9a7adc80-de5d-11eb-8aff-388166d55fe8.png)
 
 2.부하테스트 후
 
