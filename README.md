@@ -806,7 +806,8 @@ watch kubectl get al
 
 1.테스트전
 
-![image](https://user-images.githubusercontent.com/70736001/122504322-0aebc600-d035-11eb-883f-35110d9d0457.png)
+![image](https://user-images.githubusercontent.com/84000893/124528696-d4d78000-de43-11eb-9e06-67c71b3f89e5.png)
+
 
 2.테스트후
 
