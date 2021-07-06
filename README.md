@@ -704,7 +704,7 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 
 ![image](https://user-images.githubusercontent.com/84000893/124528214-9e4d3580-de42-11eb-89e3-e0d5696cf856.png)
 
-2.onlinestudy01/learningevaluatio/kubernetes/service.yaml 파일 수정 (ordermanagement/learninmanagement/mypage/notification 동일)
+2.onlinestudy01/ordermanagement/kubernetes/service.yaml 파일 수정 (ordermanagement/learninmanagement/mypage/notification 동일)
 
 ![image](https://user-images.githubusercontent.com/84000893/124528228-a4dbad00-de42-11eb-82a2-5b961e0d7433.png)
 
