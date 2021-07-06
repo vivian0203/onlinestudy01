@@ -700,15 +700,15 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 
 - 배포진행
 
-1.bidding/BiddingExamination/kubernetes/deployment.yml 파일 수정 (BiddingManagement/BiddingParticipation/MyPage/Notification/gateway 동일)
+1.onlinestudy01/orderManagement/kubernetes/deployment.yml 파일 수정 (learninmanagement/learningevaluation/mypage/notification/gateway 동일)
 
 ![image](https://user-images.githubusercontent.com/84000893/124528214-9e4d3580-de42-11eb-89e3-e0d5696cf856.png)
 
-2.bidding/BiddingExamination/kubernetes/service.yaml 파일 수정 (BiddingManagement/BiddingParticipation/MyPage/Notification 동일)
+2.onlinestudy01/learningevaluatio/kubernetes/service.yaml 파일 수정 (ordermanagement/learninmanagement/mypage/notification 동일)
 
 ![image](https://user-images.githubusercontent.com/84000893/124528228-a4dbad00-de42-11eb-82a2-5b961e0d7433.png)
 
-3.bidding/gateway/kubernetes/service.yaml 파일 수정
+3.onlinestudy01/gateway/kubernetes/service.yaml 파일 수정
 
 ![image](https://user-images.githubusercontent.com/84000893/124528238-ac02bb00-de42-11eb-8bfa-f4f7939fb838.png)
 
@@ -718,26 +718,26 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 	kubectl apply -f deployment.yml
 	kubectl apply -f service.yaml
 	
-	cd ../../BiddingExamination/kubernetes
+	cd ../../orderManagement/kubernetes
 	kubectl apply -f deployment.yml
 	kubectl apply -f service.yaml
 	
-	cd ../../BiddingManagement/kubernetes
-	kubectl apply -f deployment.yml
-	kubectl apply -f service.yaml
-	
-	
-	cd ../../BiddingParticipation/kubernetes
+	cd ../../learningManagement/kubernetes
 	kubectl apply -f deployment.yml
 	kubectl apply -f service.yaml
 	
 	
-	cd ../../MyPage/kubernetes
+	cd ../../learningEvaluation/kubernetes
 	kubectl apply -f deployment.yml
 	kubectl apply -f service.yaml
 	
 	
-	cd ../../Notification/kubernetes
+	cd ../../mypage/kubernetes
+	kubectl apply -f deployment.yml
+	kubectl apply -f service.yaml
+	
+	
+	cd ../../notification/kubernetes
 	kubectl apply -f deployment.yml
 	kubectl apply -f service.yaml
 ``` 
@@ -771,7 +771,7 @@ kubectl get all -n kafka
 ## Autoscale (HPA)
 앞서 CB(Circuit breaker)는 시스템을 안정되게 운영할 수 있게 해줬지만 사용자의 요청을 100% 받아들여주지 못했기 때문에 이에 대한 보완책으로 자동화된 확장 기능을 적용하고자 한다.
 
-- 리소스에 대한 사용량 정의(bidding/BiddingManagement/kubernetes/deployment.yml)
+- 리소스에 대한 사용량 정의(onlinestudy01/orderManagement/kubernetes/deployment.yml)
 ![image](https://user-images.githubusercontent.com/84000893/124528604-888c4000-de43-11eb-9773-7953db614ff3.png)
 
 - Autoscale 설정 (request값의 20%를 넘어서면 Replica를 10개까지 동적으로 확장)
