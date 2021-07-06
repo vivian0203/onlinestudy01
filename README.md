@@ -840,19 +840,20 @@ ConfigMap을 사용하여 변경가능성이 있는 설정을 관리
 
 ![image](https://user-images.githubusercontent.com/84000893/124547939-eb8fce00-de67-11eb-86cf-180be07ffe6a.png)
 
+![image](https://user-images.githubusercontent.com/84000893/124547955-f21e4580-de67-11eb-9f9f-462be4d00f79.png)
+
 - Config Map 생성 및 생성 확인
 ```
 kubectl create configmap bidding-cm --from-literal=url=BiddingManagement
 kubectl get cm
 ```
-![image](https://user-images.githubusercontent.com/84000893/124547955-f21e4580-de67-11eb-9f9f-462be4d00f79.png)
-
+![image](https://user-images.githubusercontent.com/84000893/124547966-f9455380-de67-11eb-9884-d665687bd4ed.png)
 
 ```
 kubectl get cm bidding-cm -o yaml
 ```
 
-![image](https://user-images.githubusercontent.com/84000893/124547966-f9455380-de67-11eb-9884-d665687bd4ed.png)
+
 
 ```
 kubectl get pod
