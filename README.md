@@ -811,7 +811,7 @@ watch kubectl get al
 
 2.테스트후
 
-![image](https://user-images.githubusercontent.com/70736001/122504349-1e972c80-d035-11eb-814e-a5ab909215c4.png)
+![image](https://user-images.githubusercontent.com/84000893/124528830-1ec06600-de44-11eb-9ea0-a4cadef99d89.png)
 
 3.부하발생 결과
 
