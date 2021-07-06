@@ -857,22 +857,6 @@ kubectl get pod
 ## Zero-Downtime deploy (Readiness Probe)
 쿠버네티스는 각 컨테이너의 상태를 주기적으로 체크(Health Check)해서 문제가 있는 컨테이너는 서비스에서 제외한다.
 
-- deployment.yml에 readinessProbe 설정 후 미설정 상태 테스트를 위해 주석처리함 
-```
-readinessProbe:
-httpGet:
-  path: '/biddingManagements'
-  port: 8080
-initialDelaySeconds: 10
-timeoutSeconds: 2
-periodSeconds: 5
-failureThreshold: 10
-```
-
-- deployment.yml에서 readinessProbe 미설정 상태로 siege 부하발생
-
-![image](https://user-images.githubusercontent.com/70736001/122505873-2906f580-d038-11eb-86b8-2f8388f82dd1.png)
-
 ```
 kubectl exec -it pod/siege  -c siege -n bidding -- /bin/bash
 siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/biddingManagements POST {"noticeNo":1,"title":"AAA"}
@@ -918,9 +902,9 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 ```
  livenessProbe:
     httpGet:
-        path: '/biddingmanagement/failed'
+        path: '/ordergmanagement/failed'
         port: 8090
-      initialDelaySeconds: 30
+      initialDelaySeconds: 120
       timeoutSeconds: 2
       periodSeconds: 5
       failureThreshold: 5
