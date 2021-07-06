@@ -821,16 +821,16 @@ watch kubectl get al
 
 ConfigMap을 사용하여 변경가능성이 있는 설정을 관리
 
-- 입찰심사(BiddingExamination) 서비스에서 동기호출(Req/Res방식)로 연결되는 입찰관리(BiddingManagement) 서비스 url 정보 일부를 ConfigMap을 사용하여 구현
+- 학습평가(LearningEvaluation) 서비스에서 동기호출(Req/Res방식)로 연결되는 주문관리(OrderManagement) 서비스 url 정보 일부를 ConfigMap을 사용하여 구현
 
 - 파일 수정
-  - 입찰심사 소스 (BiddingExamination/src/main/java/bidding/external/BiddingManagementService.java)
+  - 학습평가 소스 (LearningEvaluation/src/main/java/onlinestudy01/external/OrderManagementService.java)
 ![image](https://user-images.githubusercontent.com/84000893/124547920-e599ed00-de67-11eb-8bd1-2b18c051023a.png)
 
 
 - Yaml 파일 수정
-  - application.yml (BiddingExamination/src/main/resources/application.yml)
-  - deploy yml (BiddingExamination/kubernetes/deployment.yml)
+  - application.yml (LearningEvaluation/src/main/resources/application.yml)
+  - deploy yml (LearningEvaluation/kubernetes/deployment.yml)
 
 ![image](https://user-images.githubusercontent.com/84000893/124547939-eb8fce00-de67-11eb-86cf-180be07ffe6a.png)
 
@@ -838,13 +838,13 @@ ConfigMap을 사용하여 변경가능성이 있는 설정을 관리
 
 - Config Map 생성 및 생성 확인
 ```
-kubectl create configmap bidding-cm --from-literal=url=BiddingManagement
+kubectl create configmap onlinestudy-cm --from-literal=url=LearningEvaluation
 kubectl get cm
 ```
-![image](https://user-images.githubusercontent.com/84000893/124547966-f9455380-de67-11eb-9884-d665687bd4ed.png)
+![image](https://user-images.githubusercontent.com/84000893/124549134-b3898a80-de69-11eb-9541-2cb3c7123248.png)
 
 ```
-kubectl get cm bidding-cm -o yaml
+kubectl get cm onlinestudy-cm -o yaml
 ```
 
 ![image](https://user-images.githubusercontent.com/84000893/124547982-ff3b3480-de67-11eb-8ff4-1bbb00b5a85a.png)
