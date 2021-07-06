@@ -815,7 +815,7 @@ watch kubectl get al
 
 3.부하발생 결과
 
-![image](https://user-images.githubusercontent.com/70736001/122504389-31a9fc80-d035-11eb-976e-f43261d1a8c2.png)
+![image](https://user-images.githubusercontent.com/84000893/124528951-7363e100-de44-11eb-88bd-231d648fda70.png)
 
 ## Config Map
 ConfigMap을 사용하여 변경가능성이 있는 설정을 관리
