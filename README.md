@@ -773,7 +773,7 @@ kubectl get all -n kafka
 앞서 CB(Circuit breaker)는 시스템을 안정되게 운영할 수 있게 해줬지만 사용자의 요청을 100% 받아들여주지 못했기 때문에 이에 대한 보완책으로 자동화된 확장 기능을 적용하고자 한다.
 
 - 리소스에 대한 사용량 정의(bidding/BiddingManagement/kubernetes/deployment.yml)
-![image](https://user-images.githubusercontent.com/70736001/122503960-49cd4c00-d034-11eb-8ab4-b322e7383cc0.png)
+![image](https://user-images.githubusercontent.com/84000893/124526953-31846c00-de3f-11eb-9761-a62c8de8ff85.png)
 
 - Autoscale 설정 (request값의 20%를 넘어서면 Replica를 10개까지 동적으로 확장)
 ```
