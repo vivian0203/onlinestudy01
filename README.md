@@ -853,13 +853,13 @@ kubectl get cm
 kubectl get cm bidding-cm -o yaml
 ```
 
-
+![image](https://user-images.githubusercontent.com/84000893/124547982-ff3b3480-de67-11eb-8ff4-1bbb00b5a85a.png)
 
 ```
 kubectl get pod
 ```
+![image](https://user-images.githubusercontent.com/84000893/124547990-04987f00-de68-11eb-8dbc-a3e9e46dde10.png)
 
-![image](https://user-images.githubusercontent.com/84000893/124547982-ff3b3480-de67-11eb-8ff4-1bbb00b5a85a.png)
 
 
 ## Zero-Downtime deploy (Readiness Probe)
