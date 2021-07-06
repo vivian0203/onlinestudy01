@@ -857,26 +857,6 @@ kubectl get pod
 ## Zero-Downtime deploy (Readiness Probe)
 쿠버네티스는 각 컨테이너의 상태를 주기적으로 체크(Health Check)해서 문제가 있는 컨테이너는 서비스에서 제외한다.
 
-```
-kubectl exec -it pod/siege  -c siege -n bidding -- /bin/bash
-siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/biddingManagements POST {"noticeNo":1,"title":"AAA"}
-```
-1.부하테스트 전
-
-![image](https://user-images.githubusercontent.com/70736001/122506020-75eacc00-d038-11eb-99df-4a4b90478bc3.png)
-
-2.부하테스트 후
-
-![image](https://user-images.githubusercontent.com/70736001/122506060-84d17e80-d038-11eb-8449-b94b28a0f385.png)
-
-3.생성중인 Pod 에 대한 요청이 들어가 오류발생
-
-![image](https://user-images.githubusercontent.com/70736001/122506129-a03c8980-d038-11eb-8822-5ec57926b900.png)
-
-- 정상 실행중인 biddingmanagement으로의 요청은 성공(201),비정상 적인 요청은 실패(503 - Service Unavailable) 확인
-
-- hpa 설정에 의해 target 지수 초과하여 biddingmanagement scale-out 진행됨
-
 - deployment.yml에 readinessProbe 설정 후 부하발생 및 Availability 100% 확인
 
 ![image](https://user-images.githubusercontent.com/70736001/122506358-2527a300-d039-11eb-84cb-62eb09687bda.png)
