@@ -907,7 +907,7 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 3.readiness 정상 적용 후, Availability 100% 확인
 
-![image](https://user-images.githubusercontent.com/70736001/122506471-61f39a00-d039-11eb-9077-608f375e27f3.png)
+![image](https://user-images.githubusercontent.com/84000893/124542077-aa92bc00-de5d-11eb-86e7-ed04959761f7.png)
 
 
 ## Self-healing (Liveness Probe)
