@@ -936,7 +936,7 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 1.배포 전
 
-![image](https://user-images.githubusercontent.com/70736001/122506797-fb22b080-d039-11eb-9a0b-754e0fea45b2.png)
+![image](https://user-images.githubusercontent.com/84000893/124544694-8ab1c700-de62-11eb-9b09-4b470cda4da8.png)
 
 2.배포 후
 
