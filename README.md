@@ -702,7 +702,7 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 
 1.bidding/BiddingExamination/kubernetes/deployment.yml 파일 수정 (BiddingManagement/BiddingParticipation/MyPage/Notification/gateway 동일)
 
-![image](https://user-images.githubusercontent.com/70736001/122512566-011d8f00-d044-11eb-8bd5-91d939f7ab1b.png)
+![image](https://user-images.githubusercontent.com/84000893/124528214-9e4d3580-de42-11eb-89e3-e0d5696cf856.png)
 
 2.bidding/BiddingExamination/kubernetes/service.yaml 파일 수정 (BiddingManagement/BiddingParticipation/MyPage/Notification 동일)
 
