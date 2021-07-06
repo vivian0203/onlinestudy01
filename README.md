@@ -940,7 +940,8 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 2.배포 후
 
-![image](https://user-images.githubusercontent.com/70736001/122506831-0c6bbd00-d03a-11eb-880c-dc8d3e00798f.png)
+![image](https://user-images.githubusercontent.com/84000893/124544716-93a29880-de62-11eb-895c-3d429d3cc99b.png)
+
 
 ## Circuit Breaker
 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현함
