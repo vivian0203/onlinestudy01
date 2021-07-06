@@ -746,7 +746,7 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 ``` 
 kubectl get all
 ``` 
-![image](https://user-images.githubusercontent.com/70736001/122503307-2b1a8580-d033-11eb-83fc-63b0f2154e3b.png)
+![image](https://user-images.githubusercontent.com/84000893/124528481-3814e280-de43-11eb-8d88-86355d32361c.png)
 
 - Kafka 설치
 ``` 
