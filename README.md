@@ -650,53 +650,51 @@ http localhost:8081/orderManagements/2     # 평가점수 갱신됨 확인
 
 - GitHub 와 연결 후 로컬빌드를 진행 진행
 ```
-	cd team
-	mkdir sourcecode
-	cd sourcecode
-	git clone --recurse-submodules https://github.com/21-2-1team/bidding03.git
 	
-	cd bidding
-	cd BiddingExamination
+	mkdir onlinestudy01
+	cd onlinesstudy01
+	git clone --recurse-submodules https://github.com/vivian0203/onlinestudy01.git
+	
+
+	cd ../orderManagement
 	mvn package
 	
-	cd ../BiddingManagement
+	cd ../learningManagement
 	mvn package
 	
-	cd ../BiddingParticipation
+	cd ../learningEvaluation
 	mvn package
-	
-	cd ../MyPage
+		
+	cd ../notification
 	mvn package
-	
-	
-	cd ../Notification
+
+	cd ../mypage
 	mvn package
-	
-	
+
 	cd ../gateway
         mvn package
 ```
 - namespace 등록 및 변경
 ```
-kubectl config set-context --current --namespace=bidding  --> bidding namespace 로 변경
+kubectl config set-context --current --namespace=onlinestudy  --> onlinestudy namespace 로 변경
 
-kubectl create ns bidding
+kubectl create ns onlinestudy
 ```
 
 - ACR 컨테이너이미지 빌드
 ```
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/biddingexamination:latest .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/ordermanagement:v1.0 .
 ```
 ![image](https://user-images.githubusercontent.com/70736001/122502677-096cce80-d032-11eb-96e7-84a8024ab45d.png)
 
 나머지 서비스에 대해서도 동일하게 등록을 진행함
 ```
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/biddingmanagement:latest .
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/biddingparticipation:latest .
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/biddingparticipation:latest .
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/mypage:latest  .
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/notification:latest  .
-az acr build --registry user01skccacr --image user01skccacr.azurecr.io/gateway:latest .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/ordermanagemt:v1.0 .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/learningmanagement:v1.0 .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/learningevaluation:v1.0 .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/mypage:v1.0  .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/notification:v1.0  .
+az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v1.0 .
 ```
 
 - 배포진행
