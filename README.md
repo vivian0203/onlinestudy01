@@ -685,7 +685,7 @@ kubectl create ns onlinestudy
 ```
 az acr build --registry user17skccacr --image user17skccacr.azurecr.io/ordermanagement:v1.0 .
 ```
-![image](https://user-images.githubusercontent.com/70736001/122502677-096cce80-d032-11eb-96e7-84a8024ab45d.png)
+![image](https://user-images.githubusercontent.com/84000893/124527928-dbfd8e80-de41-11eb-8e6e-a2e7536902b7.png)
 
 나머지 서비스에 대해서도 동일하게 등록을 진행함
 ```
