@@ -903,7 +903,7 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 2.부하테스트 후
 
-![image](https://user-images.githubusercontent.com/70736001/122506421-4be5d980-d039-11eb-92a2-44e7827299bf.png)
+![image](https://user-images.githubusercontent.com/84000893/124542065-a36bae00-de5d-11eb-8bc5-014ec2ab2112.png)
 
 3.readiness 정상 적용 후, Availability 100% 확인
 
