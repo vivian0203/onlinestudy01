@@ -929,7 +929,7 @@ siege -c100 -t5S -v --content-type "application/json" 'http://20.194.120.4:8080/
 
 
 
-![image](https://user-images.githubusercontent.com/70736001/122506714-d75f6a80-d039-11eb-8bd0-223490797b58.png)
+![image](https://user-images.githubusercontent.com/84000893/124544676-7ff73200-de62-11eb-977c-92d2c4732670.png)
 
 - liveness 설정 적용되어 컨테이너 재시작 되는 것을 확인
   Retry 시도 확인 (pod 생성 "RESTARTS" 숫자가 늘어나는 것을 확인) 
