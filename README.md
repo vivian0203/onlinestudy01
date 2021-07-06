@@ -710,7 +710,7 @@ az acr build --registry user17skccacr --image user17skccacr.azurecr.io/gateway:v
 
 3.bidding/gateway/kubernetes/service.yaml 파일 수정
 
-![image](https://user-images.githubusercontent.com/70736001/122503123-da0a9180-d032-11eb-9283-224d7860c9c3.png)
+![image](https://user-images.githubusercontent.com/84000893/124528238-ac02bb00-de42-11eb-8bfa-f4f7939fb838.png)
 
 4. 배포작업 수행
 ``` 
