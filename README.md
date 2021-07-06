@@ -819,12 +819,6 @@ watch kubectl get al
 
 ## Config Map
 
-
-
-
-
-![image](https://user-images.githubusercontent.com/84000893/124547982-ff3b3480-de67-11eb-8ff4-1bbb00b5a85a.png)
-![image](https://user-images.githubusercontent.com/84000893/124547990-04987f00-de68-11eb-8dbc-a3e9e46dde10.png)
 ConfigMap을 사용하여 변경가능성이 있는 설정을 관리
 
 - 입찰심사(BiddingExamination) 서비스에서 동기호출(Req/Res방식)로 연결되는 입찰관리(BiddingManagement) 서비스 url 정보 일부를 ConfigMap을 사용하여 구현
